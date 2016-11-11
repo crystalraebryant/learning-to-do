@@ -18,11 +18,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(methodOverride());
 
-// define model ======================================
-var Todo = mongoose.model('Todo', {
-    text: String
-});
-
 // routes ===========================================
 
 // api ---------------------------------------------
