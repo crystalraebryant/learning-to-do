@@ -7,8 +7,9 @@ var bodyParser        = require('body-parser');
 var methodOverride    = require('method-override');
 
 // configuration ====================================
+var database = require('./config/database');
 
-mongoose.connect('mongodb://heroku_1k7gg4v0:kq5sc6ag84frfm80l780a392cn@ds151137.mlab.com:51137/heroku_1k7gg4v0');
+mongoose.connect(database.url);
 
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
