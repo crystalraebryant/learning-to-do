@@ -1,7 +1,5 @@
 // public/core.js
-var crystalTodo = angular.module('crystalTodo', []);
-
-function mainController($scope, $http) {
+function TodoController($scope, $http) {
     $scope.formData = {};
 
     // when landing on the page, get all todos and show them
@@ -40,3 +38,6 @@ function mainController($scope, $http) {
     };
 
 }
+
+TodoController.$inject = ['$scope', '$http'];
+var crystalTodo = angular.module('crystalTodo', []).controller('TodoController', TodoController);
