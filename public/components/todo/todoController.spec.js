@@ -15,19 +15,37 @@ describe('Todo Controller', function() {
         $controller = _$controller_;
         todoService = _Todos_;
 
-        spyOn(todoService, 'get').and.callFake(function() {
-            return {
-                success: function() {
-                    return todoList;
-                }
-            };
-        });
+        var fakeHttpPromise = {
+            success: function(data) {
+            }
+        };
 
-        var $scope = {};
+        spyOn(todoService, 'get').and.returnValue(fakeHttpPromise);
+        spyOn(todoService, 'create').and.returnValue(fakeHttpPromise);
+        spyOn(todoService, 'delete').and.returnValue(fakeHttpPromise);
+
+        $scope = {};
         todoController = $controller('todoController', { $scope: $scope, Todos: todoService });
     }))
 
     it('should be defined', function() {
         expect(todoController).toBeDefined();
+    });
+
+    it('should initialize with a call to Todos.get()', function() {
+        expect(todoService.get).toHaveBeenCalled();
+    })
+
+    it('should call Todos.create()', function() {
+        $scope.formData = {
+            text: 'Buy a pony'
+        };
+        $scope.createTodo();
+        expect(todoService.create).toHaveBeenCalled();
+    });
+
+    it('should call Todos.delete()', function() {
+        $scope.deleteTodo('1');
+        expect(todoService.delete).toHaveBeenCalled();
     });
 });
