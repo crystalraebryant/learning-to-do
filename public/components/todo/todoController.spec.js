@@ -44,6 +44,19 @@ describe('Todo Controller', function() {
         expect(todoService.create).toHaveBeenCalled();
     });
 
+    it('should not call Todos.create() if formData is null', function() {
+        $scope.formData = null;
+        $scope.createTodo();
+        expect(todoService.create).not.toHaveBeenCalled();
+    });
+
+    it('should not call Todos.create() if formData is empty', function() {
+        $scope.formData = {
+        };
+        $scope.createTodo();
+        expect(todoService.create).not.toHaveBeenCalled();
+    });
+
     it('should call Todos.delete()', function() {
         $scope.deleteTodo('1');
         expect(todoService.delete).toHaveBeenCalled();
